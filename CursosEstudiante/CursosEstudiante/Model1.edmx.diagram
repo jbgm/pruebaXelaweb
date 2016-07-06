@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1b4e0ff7d17b4707b9d30821a2b3cbe0" Name="Diagram1" >
+        <EntityTypeShape EntityType="ControlAsignacionesModel.Estudiante" Width="1.5" PointX="1.125" PointY="0.75" />
+        <EntityTypeShape EntityType="ControlAsignacionesModel.Curso" Width="1.5" PointX="7.625" PointY="0.5" />
+        <EntityTypeShape EntityType="ControlAsignacionesModel.Tarea" Width="1.5" PointX="10.25" PointY="0.875" />
+        <EntityTypeShape EntityType="ControlAsignacionesModel.Asignacion" Width="1.5" PointX="4.125" PointY="0.5" />
+        <AssociationConnector Association="ControlAsignacionesModel.EstudianteAsignacion" />
+        <AssociationConnector Association="ControlAsignacionesModel.CursoAsignacion" />
+        <AssociationConnector Association="ControlAsignacionesModel.CursoTarea" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ControlAsignacionesModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ControlAsignacionesModelStoreContainer">
+    <EntitySet Name="Estudiantes" EntityType="ControlAsignacionesModel.Store.Estudiantes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cursos" EntityType="ControlAsignacionesModel.Store.Cursos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tareas" EntityType="ControlAsignacionesModel.Store.Tareas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Asignacions" EntityType="ControlAsignacionesModel.Store.Asignacions" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EstudianteAsignacion" Association="ControlAsignacionesModel.Store.EstudianteAsignacion">
+      <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="Asignacion" EntitySet="Asignacions" />
+    </AssociationSet>
+    <AssociationSet Name="CursoAsignacion" Association="ControlAsignacionesModel.Store.CursoAsignacion">
+      <End Role="Curso" EntitySet="Cursos" />
+      <End Role="Asignacion" EntitySet="Asignacions" />
+    </AssociationSet>
+    <AssociationSet Name="CursoTarea" Association="ControlAsignacionesModel.Store.CursoTarea">
+      <End Role="Curso" EntitySet="Cursos" />
+      <End Role="Tarea" EntitySet="Tareas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdEstudiante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="longtext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cursos">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdCurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="longtext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tareas">
+    <Key>
+      <PropertyRef Name="IdTarea" />
+    </Key>
+    <Property Name="IdTarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="longtext" Nullable="false" />
+    <Property Name="Nota" Type="int" Nullable="false" />
+    <Property Name="AsignacionIdAsignacion" Type="int" Nullable="false" />
+    <Property Name="CursoIdCurso" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Asignacions">
+    <Key>
+      <PropertyRef Name="IdAsignacion" />
+    </Key>
+    <Property Name="IdAsignacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EstudianteIdEstudiante" Type="int" Nullable="false" />
+    <Property Name="CursoIdCurso" Type="int" Nullable="false" />
+    <Property Name="notaFinal" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EstudianteAsignacion">
+    <End Role="Estudiante" Type="ControlAsignacionesModel.Store.Estudiantes" Multiplicity="1" />
+    <End Role="Asignacion" Type="ControlAsignacionesModel.Store.Asignacions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="IdEstudiante" />
+      </Principal>
+      <Dependent Role="Asignacion">
+        <PropertyRef Name="EstudianteIdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoAsignacion">
+    <End Role="Curso" Type="ControlAsignacionesModel.Store.Cursos" Multiplicity="1" />
+    <End Role="Asignacion" Type="ControlAsignacionesModel.Store.Asignacions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="IdCurso" />
+      </Principal>
+      <Dependent Role="Asignacion">
+        <PropertyRef Name="CursoIdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoTarea">
+    <End Role="Curso" Type="ControlAsignacionesModel.Store.Cursos" Multiplicity="1" />
+    <End Role="Tarea" Type="ControlAsignacionesModel.Store.Tareas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="IdCurso" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="CursoIdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

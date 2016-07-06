@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ControlAsignacionesModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ControlAsignacionesModelStoreContainer">
+    <EntitySet Name="Estudiantes" EntityType="ControlAsignacionesModel.Store.Estudiantes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cursos" EntityType="ControlAsignacionesModel.Store.Cursos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tareas" EntityType="ControlAsignacionesModel.Store.Tareas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Asignacions" EntityType="ControlAsignacionesModel.Store.Asignacions" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="EstudianteAsignacion" Association="ControlAsignacionesModel.Store.EstudianteAsignacion">
+      <End Role="Estudiante" EntitySet="Estudiantes" />
+      <End Role="Asignacion" EntitySet="Asignacions" />
+    </AssociationSet>
+    <AssociationSet Name="CursoAsignacion" Association="ControlAsignacionesModel.Store.CursoAsignacion">
+      <End Role="Curso" EntitySet="Cursos" />
+      <End Role="Asignacion" EntitySet="Asignacions" />
+    </AssociationSet>
+    <AssociationSet Name="CursoTarea" Association="ControlAsignacionesModel.Store.CursoTarea">
+      <End Role="Curso" EntitySet="Cursos" />
+      <End Role="Tarea" EntitySet="Tareas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdEstudiante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="longtext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cursos">
+    <Key>
+      <PropertyRef Name="IdCurso" />
+    </Key>
+    <Property Name="IdCurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="longtext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tareas">
+    <Key>
+      <PropertyRef Name="IdTarea" />
+    </Key>
+    <Property Name="IdTarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="longtext" Nullable="false" />
+    <Property Name="Nota" Type="int" Nullable="false" />
+    <Property Name="AsignacionIdAsignacion" Type="int" Nullable="false" />
+    <Property Name="CursoIdCurso" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Asignacions">
+    <Key>
+      <PropertyRef Name="IdAsignacion" />
+    </Key>
+    <Property Name="IdAsignacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EstudianteIdEstudiante" Type="int" Nullable="false" />
+    <Property Name="CursoIdCurso" Type="int" Nullable="false" />
+    <Property Name="notaFinal" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="EstudianteAsignacion">
+    <End Role="Estudiante" Type="ControlAsignacionesModel.Store.Estudiantes" Multiplicity="1" />
+    <End Role="Asignacion" Type="ControlAsignacionesModel.Store.Asignacions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estudiante">
+        <PropertyRef Name="IdEstudiante" />
+      </Principal>
+      <Dependent Role="Asignacion">
+        <PropertyRef Name="EstudianteIdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoAsignacion">
+    <End Role="Curso" Type="ControlAsignacionesModel.Store.Cursos" Multiplicity="1" />
+    <End Role="Asignacion" Type="ControlAsignacionesModel.Store.Asignacions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="IdCurso" />
+      </Principal>
+      <Dependent Role="Asignacion">
+        <PropertyRef Name="CursoIdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CursoTarea">
+    <End Role="Curso" Type="ControlAsignacionesModel.Store.Cursos" Multiplicity="1" />
+    <End Role="Tarea" Type="ControlAsignacionesModel.Store.Tareas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="IdCurso" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="CursoIdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ControlAsignacionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ControlAsignacionesEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Estudiantes" EntityType="ControlAsignacionesModel.Estudiante" />
+          <EntitySet Name="Cursos" EntityType="ControlAsignacionesModel.Curso" />
+          <EntitySet Name="Tareas" EntityType="ControlAsignacionesModel.Tarea" />
+          <EntitySet Name="Asignacions" EntityType="ControlAsignacionesModel.Asignacion" />
+          <AssociationSet Name="EstudianteAsignacion" Association="ControlAsignacionesModel.EstudianteAsignacion">
+            <End Role="Estudiante" EntitySet="Estudiantes" />
+            <End Role="Asignacion" EntitySet="Asignacions" />
+          </AssociationSet>
+          <AssociationSet Name="CursoAsignacion" Association="ControlAsignacionesModel.CursoAsignacion">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="Asignacion" EntitySet="Asignacions" />
+          </AssociationSet>
+          <AssociationSet Name="CursoTarea" Association="ControlAsignacionesModel.CursoTarea">
+            <End Role="Curso" EntitySet="Cursos" />
+            <End Role="Tarea" EntitySet="Tareas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="IdEstudiante" />
+          </Key>
+          <Property Name="IdEstudiante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Asignaciones" Relationship="ControlAsignacionesModel.EstudianteAsignacion" FromRole="Estudiante" ToRole="Asignacion" />
+          <Property Name="nombre" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IdCurso" />
+          </Key>
+          <Property Name="IdCurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Asignaciones" Relationship="ControlAsignacionesModel.CursoAsignacion" FromRole="Curso" ToRole="Asignacion" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <NavigationProperty Name="Tareas" Relationship="ControlAsignacionesModel.CursoTarea" FromRole="Curso" ToRole="Tarea" />
+        </EntityType>
+        <EntityType Name="Tarea">
+          <Key>
+            <PropertyRef Name="IdTarea" />
+          </Key>
+          <Property Name="IdTarea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" Nullable="false" />
+          <Property Name="Nota" Type="Int32" Nullable="false" />
+          <Property Name="AsignacionIdAsignacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="ControlAsignacionesModel.CursoTarea" FromRole="Tarea" ToRole="Curso" />
+          <Property Name="CursoIdCurso" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asignacion">
+          <Key>
+            <PropertyRef Name="IdAsignacion" />
+          </Key>
+          <Property Name="IdAsignacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Estudiante" Relationship="ControlAsignacionesModel.EstudianteAsignacion" FromRole="Asignacion" ToRole="Estudiante" />
+          <Property Name="EstudianteIdEstudiante" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Curso" Relationship="ControlAsignacionesModel.CursoAsignacion" FromRole="Asignacion" ToRole="Curso" />
+          <Property Name="CursoIdCurso" Type="Int32" Nullable="false" />
+          <Property Name="notaFinal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EstudianteAsignacion">
+          <End Type="ControlAsignacionesModel.Estudiante" Role="Estudiante" Multiplicity="1" />
+          <End Type="ControlAsignacionesModel.Asignacion" Role="Asignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="IdEstudiante" />
+            </Principal>
+            <Dependent Role="Asignacion">
+              <PropertyRef Name="EstudianteIdEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CursoAsignacion">
+          <End Type="ControlAsignacionesModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="ControlAsignacionesModel.Asignacion" Role="Asignacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="Asignacion">
+              <PropertyRef Name="CursoIdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CursoTarea">
+          <End Type="ControlAsignacionesModel.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="ControlAsignacionesModel.Tarea" Role="Tarea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="Tarea">
+              <PropertyRef Name="CursoIdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ControlAsignacionesModelStoreContainer" CdmEntityContainer="ControlAsignacionesEntities">
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="IsTypeOf(ControlAsignacionesModel.Estudiante)">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cursos">
+      <EntityTypeMapping TypeName="IsTypeOf(ControlAsignacionesModel.Curso)">
+        <MappingFragment StoreEntitySet="Cursos">
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tareas">
+      <EntityTypeMapping TypeName="IsTypeOf(ControlAsignacionesModel.Tarea)">
+        <MappingFragment StoreEntitySet="Tareas">
+          <ScalarProperty Name="IdTarea" ColumnName="IdTarea" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="AsignacionIdAsignacion" ColumnName="AsignacionIdAsignacion" />
+          <ScalarProperty Name="CursoIdCurso" ColumnName="CursoIdCurso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Asignacions">
+      <EntityTypeMapping TypeName="IsTypeOf(ControlAsignacionesModel.Asignacion)">
+        <MappingFragment StoreEntitySet="Asignacions">
+          <ScalarProperty Name="IdAsignacion" ColumnName="IdAsignacion" />
+          <ScalarProperty Name="EstudianteIdEstudiante" ColumnName="EstudianteIdEstudiante" />
+          <ScalarProperty Name="CursoIdCurso" ColumnName="CursoIdCurso" />
+          <ScalarProperty Name="notaFinal" ColumnName="notaFinal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
